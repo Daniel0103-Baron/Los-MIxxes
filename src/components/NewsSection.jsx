@@ -126,71 +126,76 @@ export default function NewsSection() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md overflow-y-auto"
+              className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md overflow-y-auto"
               onClick={() => setActiveNewsModal(null)}
             >
               <motion.div
-                initial={{ scale: 0.9, y: 20 }}
+                initial={{ scale: 0.95, y: 15 }}
                 animate={{ scale: 1, y: 0 }}
-                exit={{ scale: 0.9, y: 20 }}
+                exit={{ scale: 0.95, y: 15 }}
                 onClick={(e) => e.stopPropagation()}
-                className="bg-[#121826] border border-cyan-500/40 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative my-8"
+                className="bg-[#121826] border border-cyan-500/40 rounded-3xl max-w-2xl w-full max-h-[90vh] flex flex-col shadow-2xl relative overflow-hidden my-auto"
               >
+                {/* Floating Close Button */}
                 <button
                   onClick={() => setActiveNewsModal(null)}
-                  className="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 text-slate-300"
+                  className="absolute top-3 right-3 z-30 w-9 h-9 rounded-full bg-black/70 hover:bg-black/90 text-white flex items-center justify-center border border-white/20 shadow-lg cursor-pointer transition-colors"
+                  aria-label="Cerrar noticia"
                 >
                   ✕
                 </button>
 
-                {/* Modal Main Image Display */}
-                <div className="relative h-64 sm:h-80 rounded-2xl overflow-hidden mb-6 bg-slate-900 border border-white/10">
-                  <img
-                    src={activeNewsModal.gallery ? activeNewsModal.gallery[activeGalleryIndex] : activeNewsModal.image}
-                    alt={activeNewsModal.title}
-                    className="w-full h-full object-cover"
-                  />
-                  <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-cyan-500/20 border border-cyan-500/40 text-cyan-300 text-xs font-bold uppercase backdrop-blur-md">
-                    {activeNewsModal.category}
-                  </span>
-                </div>
-
-                {/* Gallery Thumbnails if available */}
-                {activeNewsModal.gallery && activeNewsModal.gallery.length > 1 && (
-                  <div className="flex gap-2 mb-6 overflow-x-auto pb-2">
-                    {activeNewsModal.gallery.map((img, idx) => (
-                      <button
-                        key={idx}
-                        onClick={() => setActiveGalleryIndex(idx)}
-                        className={`w-16 h-12 rounded-lg overflow-hidden border-2 flex-shrink-0 transition-all ${
-                          activeGalleryIndex === idx ? 'border-cyan-400 scale-105 shadow-md shadow-cyan-500/30' : 'border-transparent opacity-60 hover:opacity-100'
-                        }`}
-                      >
-                        <img src={img} alt="Thumb" className="w-full h-full object-cover" />
-                      </button>
-                    ))}
+                {/* Scrollable Modal Content */}
+                <div className="overflow-y-auto p-5 sm:p-7">
+                  {/* Modal Main Image Display */}
+                  <div className="relative h-52 sm:h-72 rounded-2xl overflow-hidden mb-5 bg-slate-900 border border-white/10">
+                    <img
+                      src={activeNewsModal.gallery ? activeNewsModal.gallery[activeGalleryIndex] : activeNewsModal.image}
+                      alt={activeNewsModal.title}
+                      className="w-full h-full object-cover"
+                    />
+                    <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-cyan-500/20 border border-cyan-500/40 text-cyan-300 text-xs font-bold uppercase backdrop-blur-md">
+                      {activeNewsModal.category}
+                    </span>
                   </div>
-                )}
 
-                <div className="flex items-center gap-2 text-xs text-slate-400 mb-2">
-                  <Calendar className="w-3.5 h-3.5 text-cyan-400" />
-                  <span>{activeNewsModal.date}</span>
+                  {/* Gallery Thumbnails if available */}
+                  {activeNewsModal.gallery && activeNewsModal.gallery.length > 1 && (
+                    <div className="flex gap-2 mb-5 overflow-x-auto pb-2">
+                      {activeNewsModal.gallery.map((img, idx) => (
+                        <button
+                          key={idx}
+                          onClick={() => setActiveGalleryIndex(idx)}
+                          className={`w-16 h-12 rounded-lg overflow-hidden border-2 flex-shrink-0 transition-all ${
+                            activeGalleryIndex === idx ? 'border-cyan-400 scale-105 shadow-md shadow-cyan-500/30' : 'border-transparent opacity-60 hover:opacity-100'
+                          }`}
+                        >
+                          <img src={img} alt="Thumb" className="w-full h-full object-cover" />
+                        </button>
+                      ))}
+                    </div>
+                  )}
+
+                  <div className="flex items-center gap-2 text-xs text-slate-400 mb-2">
+                    <Calendar className="w-3.5 h-3.5 text-cyan-400" />
+                    <span>{activeNewsModal.date}</span>
+                  </div>
+
+                  <h3 className="text-xl sm:text-2xl font-extrabold text-white font-['Rajdhani'] mb-3 leading-tight">
+                    {activeNewsModal.title}
+                  </h3>
+
+                  <div className="text-sm text-slate-300 leading-relaxed whitespace-pre-line bg-black/40 p-4 rounded-xl border border-white/5 mb-6">
+                    {activeNewsModal.fullBody}
+                  </div>
+
+                  <button
+                    onClick={() => setActiveNewsModal(null)}
+                    className="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 font-bold text-white text-xs uppercase tracking-wider hover:opacity-95 transition-opacity cursor-pointer"
+                  >
+                    Cerrar Noticia
+                  </button>
                 </div>
-
-                <h3 className="text-2xl font-extrabold text-white font-['Rajdhani'] mb-4 leading-tight">
-                  {activeNewsModal.title}
-                </h3>
-
-                <div className="text-sm text-slate-300 leading-relaxed whitespace-pre-line bg-black/40 p-4 rounded-xl border border-white/5 mb-6">
-                  {activeNewsModal.fullBody}
-                </div>
-
-                <button
-                  onClick={() => setActiveNewsModal(null)}
-                  className="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 font-bold text-white text-xs uppercase tracking-wider"
-                >
-                  Cerrar Noticia
-                </button>
               </motion.div>
             </motion.div>
           )}

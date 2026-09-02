@@ -31,7 +31,7 @@ export default function App() {
       <Navbar activeSection={activeSection} setActiveSection={setActiveSection} />
 
       {/* Main Sections */}
-      <main className="relative z-10">
+      <main className="relative">
         <Hero scrollTo={scrollTo} />
         
         {/* Interactive Text Scroll Animation Section */}

@@ -152,7 +152,7 @@ export default function RosterStats() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
+              className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/85 backdrop-blur-md overflow-y-auto"
               onClick={() => setActivePlayerModal(null)}
             >
               <motion.div
@@ -160,7 +160,7 @@ export default function RosterStats() {
                 animate={{ scale: 1, y: 0 }}
                 exit={{ scale: 0.9, y: 20 }}
                 onClick={(e) => e.stopPropagation()}
-                className="bg-[#121826] border border-cyan-500/40 rounded-3xl p-6 sm:p-8 max-w-lg w-full shadow-2xl relative"
+                className="bg-[#121826] border border-cyan-500/40 rounded-3xl p-6 sm:p-8 max-w-lg w-full shadow-2xl relative my-auto max-h-[90vh] overflow-y-auto"
               >
                 <button
                   onClick={() => setActivePlayerModal(null)}

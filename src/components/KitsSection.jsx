@@ -109,7 +109,7 @@ export default function KitsSection() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-xl"
+              className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90 backdrop-blur-xl"
               onClick={() => setIsZoomed(false)}
             >
               <div className="relative max-w-5xl w-full max-h-[90vh]">
